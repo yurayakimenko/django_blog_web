@@ -1,0 +1,49 @@
+<!doctype html>
+{% load staticfiles %}
+{% load widget_tweaks %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>Регистрация</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'auth/css/signin.css' %}" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+    <form class="form-signin" method="post" action="">
+      {% csrf_token %}
+      <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+      <h1 class="h3 mb-3 font-weight-normal">Регистрация</h1>
+      {% render_field form.username class="form-control" placeholder="Имя пользователя" %}
+
+      {% render_field form.password1 class="form-control" placeholder="Пароль" type="password" %}
+      {% if form.password1.errors %}
+      {% for error in form.password1.errors %}
+        <p style="color: red">{{ error }}</p>
+      {% endfor %}
+      {% endif %}
+
+      {% render_field form.password2 class="form-control" placeholder="Пароль повторно" type="password" %}
+      {% if form.password2.errors %}
+      {% for error in form.password2.errors %}
+        <p style="color: red">{{ error }}</p>
+      {% endfor %}
+      {% endif %}
+      <a href="/login">Уже есть аккаунт? Войти</a>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Регистрация</button>
+    </form>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </body>
+</html>

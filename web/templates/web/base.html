@@ -1,0 +1,74 @@
+<!doctype html>
+{% load staticfiles %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{% block title %}{% endblock %} | Бесплатный хостинг изображений</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'web/css/album.css' %}" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <header>
+      <div class="navbar navbar-dark bg-dark box-shadow">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+            <strong>PicHOST</strong>
+          </a>
+        </div>
+        {% if user.is_authenticated %}
+        <div class="navbar-toggler">
+          <a class="navbar-brand d-flex align-items-center">
+            <strong>{{user.username}}</strong>
+          </a>
+        </div>
+        <div class="navbar-toggler">
+          <a class="navbar-brand d-flex align-items-center">
+            Последний вход: {{user.last_login}}
+          </a>
+        </div>
+        <div class="navbar-toggler">
+          <a href="{% url 'logout' %}?next={{request.path}}" class="navbar-brand d-flex align-items-center">
+            Выйти
+          </a>
+        </div>
+        {% endif %}
+      </div>
+    </header>
+
+    <main role="main">
+
+      {% block body %}
+      {% endblock %}
+
+    </main>
+
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-right">
+          <a href="#">Наверх</a>
+        </p>
+        <p>Хостинг без ограничений навсегда</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    {% csrf_token %}
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+      var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+    </script>
+    <script src="{% static 'web/js/csrf.js' %}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </body>
+</html>
